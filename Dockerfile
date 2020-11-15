@@ -1,10 +1,11 @@
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 
-WORKDIR /app
+WORKDIR /api
 
 COPY requirements.txt .
 # コンテナ内で必要なパッケージをインストール
-RUN apk add --no-cache build-base \
+RUN apk add --no-cache build-base libffi-dev \
+ && pip install --upgrade setuptools \
  && pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt \
  && apk del build-base
 

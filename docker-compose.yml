@@ -3,9 +3,26 @@ version: "3.0"
 services:
   # FastAPI
   api:
-    container_name: "api"
-    build: .
     restart: always
-    tty: true
+    build: .
+    container_name: 'api'
     ports:
       - 8000:8000
+    volumes:
+      - ./api
+    depends_on:
+      - db
+  db:
+    restart: always
+    image: mariadb:latest
+    ports:
+      - 3306:33060
+    container_name: 'api_db'
+    environment:
+      MYSQL_DATABASE: example
+      MYSQL_ROOT_PASSWORD: example
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
