@@ -1,9 +1,9 @@
-fastapi~=0.61.2
+fastapi
 sqlalchemy 
-uvicorn~=0.12.2
+uvicorn
 email-validator
 graphene 
 jinja2
 aiofiles
 PyMySQL
-starlette~=0.14.1
+starlette
